@@ -1,156 +1,330 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página interactiva dedicada a Max Verstappen, campeonatos, victorias, récords y redes sociales">
+    <title>Max Verstappen: Campeón de Fórmula 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: #780206;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #061161, #780206);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #061161, #780206); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            color: white; /* Cambia el color del texto a blanco */
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #000066, #FF6600);
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        /* Cambiar color de los enlaces (links) a azul */
-        a {
-            color: #1E90FF; /* Color azul para los enlaces */
-            text-decoration: none; /* Quitar subrayado de los enlaces */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
 
-        /* Cambiar color cuando el enlace esté en hover */
-        a:hover {
-            color: #FF6347; /* Color tomate al pasar el ratón sobre el enlace */
+        header h1 {
+            font-size: 1.8em;
+            color: #FF6600;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
+        header h1:hover {
+            color: #000066;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5em;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            position: relative;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            background: #FF6600;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Max_Verstappen_2017_Malaysia_FP2_1.jpg') center/cover no-repeat;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+        }
+
+        .section {
+            padding: 4em 2em;
+            background-color: #333333; /* Fondo más oscuro para las secciones */
+            color: #fff; /* Texto en blanco para mejor contraste */
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #FF6600;
+            margin-bottom: 1em;
+        }
+
+        .section p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 2em;
+            margin-top: 2em;
+            padding-left: 5%;
+        }
+
+        .card {
+            background: #000066;
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            color: #FF6600;
+            margin: 1em 0;
+        }
+
+        footer {
+            background: #000066;
+            text-align: center;
+            padding: 2em;
+            color: #fff;
+        }
+
+        footer a {
+            color: #FF6600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: flex-start;
+            gap: 2em;
+            margin-top: 2em;
+            padding-left: 5%;
+        }
+
+        .socials a {
+            color: #fff;
+            font-size: 2em;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .socials a:hover {
+            transform: scale(1.2);
+            color: #FF6600;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .socials {
+                flex-direction: column;
+                gap: 1em;
+                padding-left: 0;
+            }
+
+            .cards {
+                justify-content: center;
+                padding-left: 0;
+            }
+        }
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Max Verstappen</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Max Verstappen</h1>
-    <nav>
-      <ul>
-        <li><a href="#Campeonatos">Campeonatos</a></li>
-        <li><a href="#Victorias">Victorias en la Formula 1</a></li>
-        <li><a href="#Records">Los Récords de Max Verstappen</a></li>
-        <li><a href="#Redes">Redes Sociales</a></li>
-      </ul>
-    </nav>
-    <section id="campeonatos">
-    <h2>Campeonatos</h2>
+    <header>
+        <h1>Max Verstappen</h1>
+        <ul class="nav-links">
+            <li><a href="#campeonatos">Campeonatos</a></li>
+            <li><a href="#victorias">Victorias</a></li>
+            <li><a href="#records">Récords</a></li>
+            <li><a href="#redes">Redes Sociales</a></li>
+        </ul>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>La Leyenda de la Fórmula 1</h2>
+            <p style="font-size: 2.5rem;">Explora la grandeza de Max Verstappen, sus logros y su legado en la Fórmula 1.</p>
+        </div>
+    </div>
+    
+
+    <section id="campeonatos" class="section">
+        <h2>Campeonatos</h2>
+        <p>Desde su primer campeonato en 2021 hasta su dominio absoluto en 2024, Max Verstappen ha demostrado ser un piloto fuera de serie.</p>
+        <div class="cards">
+            <div class="card">
+                <h3>2021 El Despertar del Campeón:</h3>
+                <p>El primer título de Max fue una guerra sin cuartel contra Lewis Hamilton, donde
+                    cada punto era una batalla. En una temporada llena de drama, controversias y maniobras audaces,
+                     Verstappen demostró ser un piloto implacable. La última carrera en Abu Dhabi se convirtió en una 
+                     épica final, con un reinicio en la última vuelta que quedará grabado en la historia. Max aprovechó 
+                     la oportunidad y, con neumáticos frescos, adelantó a Hamilton en un movimiento digno de un campeón.
+                      Fue el inicio de su reinado. </p>
+            </div>
+            <div class="card">
+                <h3>2022 La Dominación Total</h3>
+                <p>Si el primer campeonato fue una lucha, el segundo fue una obra maestra de control absoluto. En 2022,
+                    Max y Red Bull perfeccionaron su fórmula, estableciendo un dominio aplastante. Con un auto veloz y
+                     estrategias impecables, Verstappen se coronó campeón en Suzuka, bajo una lluvia que añadió dramatismo 
+                     al momento. Sus victorias consecutivas y su capacidad para superar adversidades consolidaron su lugar 
+                     como uno de los mejores.</p>
+            </div>
+            <div class="card">
+                <h3>2023 El Tricampeonato Del Leon Neerlandés</h3>
+                <p>En 2023, Max alcanzó nuevos niveles de grandeza. Red Bull continuó con su hegemonía, y Verstappen
+                    se mostró imparable en la pista. El campeonato fue una oda a la consistencia y a la agresividad
+                     calculada, con Max ganando una increíble cantidad de carreras y rompiendo récords. Su tercer título
+                      fue asegurado con varias carreras restantes, subrayando su estatus como un piloto que no dejaba nada al azar.</p>
+            </div>
+            <div class="card">
+                <h3>2024 El Imperio Inquebrantable</h3>
+                <p>En 2023, Max alcanzó nuevos niveles de grandeza. Red Bull continuó con su hegemonía, y Verstappen
+                    se mostró imparable en la pista. El campeonato fue una oda a la consistencia y a la agresividad
+                     calculada, con Max ganando una increíble cantidad de carreras y rompiendo récords. Su tercer título
+                      fue asegurado con varias carreras restantes, subrayando su estatus como un piloto que no dejaba nada al azar.</p>
+            </div>
+
+        </div>
     </section>
-    <p>Los campeonatos de Max Verstappen son 4 en total, estos son
-        <hr>
-         <ol>
-        <li>2021</li>
-        <li>2022</li>
-        <li>2023</li>
-        <li>2024</li>
-         </ol></p>
-    <hr>
-    <h4>2021 - El Despertar del Campeón</h4>
-         <p>El primer título de Max fue una guerra sin cuartel contra Lewis Hamilton, donde
-        cada punto era una batalla. En una temporada llena de drama, controversias y maniobras audaces,
-         Verstappen demostró ser un piloto implacable. La última carrera en Abu Dhabi se convirtió en una 
-         épica final, con un reinicio en la última vuelta que quedará grabado en la historia. Max aprovechó 
-         la oportunidad y, con neumáticos frescos, adelantó a Hamilton en un movimiento digno de un campeón.
-          Fue el inicio de su reinado. </p>
 
-    <hr>
-    <h4>2022 - La Dominación Total</h4>
-        <p>Si el primer campeonato fue una lucha, el segundo fue una obra maestra de control absoluto. En 2022,
-         Max y Red Bull perfeccionaron su fórmula, estableciendo un dominio aplastante. Con un auto veloz y
-          estrategias impecables, Verstappen se coronó campeón en Suzuka, bajo una lluvia que añadió dramatismo 
-          al momento. Sus victorias consecutivas y su capacidad para superar adversidades consolidaron su lugar 
-          como uno de los mejores.</p>
-          
-    <hr>
+    <section id="victorias" class="section">
+        <h2>Victorias en la Fórmula 1</h2>
+        <p>Las victorias de Max Verstappen en la Fórmula 1 son una mezcla de talento puro, valentía en la pista y
+            determinación inquebrantable. Desde su primer triunfo en el Gran Premio de España en 2016, cuando se 
+            convirtió en el ganador más joven en la historia del deporte, Max ha demostrado que está destinado a la grandeza.
 
-     <h4>2023 - El tricampeonato Del Leon Neerlandés</h4>
-          <p>En 2023, Max alcanzó nuevos niveles de grandeza. Red Bull continuó con su hegemonía, y Verstappen
-             se mostró imparable en la pista. El campeonato fue una oda a la consistencia y a la agresividad
-              calculada, con Max ganando una increíble cantidad de carreras y rompiendo récords. Su tercer título
-               fue asegurado con varias carreras restantes, subrayando su estatus como un piloto que no dejaba nada al azar.</p>
+            Cada victoria refleja su estilo único: agresivo pero calculado. Ya sea en las calles cerradas de Mónaco, 
+            donde la precisión es clave, o en circuitos de alta velocidad como Spa-Francorchamps, donde el coraje domina,
+            Verstappen ha dejado claro que no hay terreno donde no pueda triunfar.
+            
+            Con el respaldo del equipo Red Bull y su maquinaria de primer nivel, Max ha transformado la consistencia en
+            un arma letal. Las temporadas recientes lo han visto dominar con un control absoluto, sumando victorias consecutivas 
+            y estableciendo récords, como el mayor número de triunfos en una sola temporada.
+            
+            Pero lo que realmente define sus victorias es la pasión con la que las celebra. Desde la bandera a cuadros hasta 
+            el podio, cada triunfo de Max es un recordatorio de su hambre de éxito y su deseo de seguir haciendo historia en la Fórmula 1.</p>
+    </section>
 
-     <hr>
+    <section id="records" class="section">
+        <h2>Récords de Max Verstappen</h2>
+        <p>Max Verstappen no solo ha conquistado títulos en la Fórmula 1; ha dejado una marca imborrable con una serie de récords que
+            consolidan su lugar entre los grandes del deporte. Su combinación de talento natural, valentía y determinación lo ha llevado 
+            a reescribir los libros de historia.</p> 
+       <ol>
+           <li>Ganador Más Joven: Con solo 18 años y 227 días, Max se convirtió en el ganador más 
+               joven de un Gran Premio en España 2016, mostrando al mundo que estaba destinado a la grandeza.</li>
+           <li>Más Victorias en una Temporada: En 2023, Verstappen rompió récords al lograr 19 victorias en una sola temporada
+               , superando el récord anterior y demostrando un dominio aplastante.</li>
+           <li>Mayor Número de Puntos en una Temporada: También en 2023, estableció un nuevo récord 
+               de puntos, acumulando 575 en una campaña casi perfecta, destacando su consistencia y excelencia.</li>
+           <li>Más Carreras Consecutivas Ganadas: En 2023, Max escribió otro capítulo histórico al ganar 10 Grandes Premios consecutivos,
+                dejando claro que su dominio no tiene precedentes.</li>
+        </ol>
+    </section>
 
-     <h4>2024 - El Imperio Inquebrantable</h4>
-            <p>El cuarto título fue un testamento de su evolución como piloto y líder. Enfrentando la creciente competencia 
-                de Ferrari, Mercedes y McLaren, Max tuvo que combinar su habilidad natural con una mentalidad estratégica. 
-                La temporada fue un equilibrio entre la agresión y la paciencia, pero una vez más, Verstappen demostró por
-                 qué estaba en la cima. Las luchas en pista y las rivalidades intensas no hicieron más que fortalecer su 
-                 legado como uno de los mejores de todos los tiempos.</p>
+    <section id="redes" class="section">
+        <h2>Redes Sociales</h2>
+        <p>Conéctate con Max Verstappen a través de sus plataformas oficiales:</p>
+        <div class="socials">
+            <a href="https://linktr.ee/verstappencom" target="_blank" title="Tienda Oficial">
+                <i class="fas fa-store"></i>
+            </a>
+            <a href="https://www.tiktok.com/@verstappen.com" target="_blank" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.instagram.com/maxverstappen1/" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </section>
 
-            <hr>
-            <p>Con cada campeonato, Max Verstappen no solo conquistó títulos, sino que redefinió lo que significa ser un 
-                campeón de Fórmula 1. Su velocidad, determinación y hambre de victoria lo convirtieron en una leyenda viviente,
-                 dejando una marca imborrable en la historia del deporte.</p>
-
-            <hr>
-            <div style="text-align: center; height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;"> 
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5mchDLVOCTaKitRW0xxCPrdH3eLwsV5uNZA&s" 
-                    alt="Cuarto Campeonato De Max Verstappen" 
-                    style="max-width: 100%; max-height: 90%; object-fit: contain; margin-bottom: 10px;">
-            </div>
-                 
-        <hr>
-        <nav>
-            <section id="Victorias">
-                <h2>Victorias en la Formula 1</h2>
-            </section>
-        </nav>
-            <h3>Las Victorias de Max Verstappen: Un Camino Hacia la Grandeza</h3>
-
-                    <p>Las victorias de Max Verstappen en la Fórmula 1 son una mezcla de talento puro, valentía en la pista y
-                        determinación inquebrantable. Desde su primer triunfo en el Gran Premio de España en 2016, cuando se 
-                        convirtió en el ganador más joven en la historia del deporte, Max ha demostrado que está destinado a la grandeza.
-
-                        Cada victoria refleja su estilo único: agresivo pero calculado. Ya sea en las calles cerradas de Mónaco, 
-                        donde la precisión es clave, o en circuitos de alta velocidad como Spa-Francorchamps, donde el coraje domina,
-                        Verstappen ha dejado claro que no hay terreno donde no pueda triunfar.
-                        
-                        Con el respaldo del equipo Red Bull y su maquinaria de primer nivel, Max ha transformado la consistencia en
-                        un arma letal. Las temporadas recientes lo han visto dominar con un control absoluto, sumando victorias consecutivas 
-                        y estableciendo récords, como el mayor número de triunfos en una sola temporada.
-                        
-                        Pero lo que realmente define sus victorias es la pasión con la que las celebra. Desde la bandera a cuadros hasta 
-                        el podio, cada triunfo de Max es un recordatorio de su hambre de éxito y su deseo de seguir haciendo historia en la Fórmula 1.</p>
-                        
-            <div style="text-align: center;"> 
-            <img src="https://www.semana.com/resizer/v2/PCL23637DVHORLI7FTFDLT7BJU.jpg?auth=f26f9f0dcad75299e935df957a6aad097c6e3cc3bda0e52ce56b06a1fd9a1da5&smart=true&quality=75&width=1280&height=720" alt=""
-            style="max-width: 50%; max-height: 50%; object-fit: contain;">
-            </div>
-            <hr>
-            <nav>
-                <section id="Records">
-                <h2>Los Récords de Max Verstappen</h2>
-                </section>
-            </nav>
-                    <p>Max Verstappen no solo ha conquistado títulos en la Fórmula 1; ha dejado una marca imborrable con una serie de récords que
-                         consolidan su lugar entre los grandes del deporte. Su combinación de talento natural, valentía y determinación lo ha llevado 
-                         a reescribir los libros de historia.</p> 
-                    <ol>
-                        <li>Ganador Más Joven: Con solo 18 años y 227 días, Max se convirtió en el ganador más 
-                            joven de un Gran Premio en España 2016, mostrando al mundo que estaba destinado a la grandeza.</li>
-                        <li>Más Victorias en una Temporada: En 2023, Verstappen rompió récords al lograr 19 victorias en una sola temporada
-                            , superando el récord anterior y demostrando un dominio aplastante.</li>
-                        <li>Mayor Número de Puntos en una Temporada: También en 2023, estableció un nuevo récord 
-                            de puntos, acumulando 575 en una campaña casi perfecta, destacando su consistencia y excelencia.</li>
-                        <li>Más Carreras Consecutivas Ganadas: En 2023, Max escribió otro capítulo histórico al ganar 10 Grandes Premios consecutivos,
-                             dejando claro que su dominio no tiene precedentes.</li>
-                        </ol>
-                <hr>
-
-                <nav>
-                    <section id="Redes">
-                    <h2>Redes Sociales</h2>
-                    </section>
-                   <p>Tienda Oficial de Marketing De Max Verstappen</p> <a target= "_blank" href = "https://linktr.ee/verstappencom">Tienda Oficial</a><br>
-                   <p>Red Social Oficial De Tiktok De Max Verstappen</p>  <a target= "_blank" href ="https://www.tiktok.com/@verstappen.com">Tik Tok</a><br>
-                   <p>Red Social Oficial De Instagram De Max Verstappen</p> <a target="_blank" href="https://www.instagram.com/maxverstappen1/">Instagram</a><br>
-
-                <hr>
-
-            </body>
+    <footer>
+        <p>&copy; 2025 Max Verstappen. Todos los derechos reservados.</p>
+    </footer>
+</body>
 </html>
